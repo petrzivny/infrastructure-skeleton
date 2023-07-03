@@ -66,7 +66,6 @@ Don't forget to give the project a star!
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ## Pictures
-![ci-pipeline.png](documentation%2Fimages%2Fci-pipeline.png)
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- CONTRIBUTING -->
