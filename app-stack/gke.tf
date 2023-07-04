@@ -2,8 +2,8 @@
 resource "google_container_cluster" "main" {
   provider = google-beta
   #  name     = "${var.company_name}-${var.application_code}-${var.environment}-kcl-${var.region_code}"
-  name     = "cluster-1"
-  location = var.zone
+  name     = "${var.environment}-gke"
+  location = local.zone
 
   # Disable the Google Cloud Logging service because you may overrun the Logging free tier allocation, and it may be expensive
   #  logging_service = "none"
@@ -45,20 +45,22 @@ resource "google_container_cluster" "main" {
   ip_allocation_policy {}
 
   workload_identity_config {
-    workload_pool = "${var.gcp_project_id}.svc.id.goog"
+    workload_pool = "${var.project_id}.svc.id.goog"
   }
 
-  #  master_authorized_networks_config {
-  #    cidr_blocks {
-  #      cidr_block = var.allowing_admin_access_from_ip
-  #      display_name = "Holesovice"
-  #    }
-  #  }
+  master_authorized_networks_config {
+    dynamic "cidr_blocks" {
+      for_each = var.allowing_admin_access_from_ip == null ? [] : [1]
+      content {
+        cidr_block = var.allowing_admin_access_from_ip
+      }
+    }
+  }
 
   node_pool {
     name = "default-pool"
     node_locations = [
-      var.zone,
+      local.zone,
     ]
     node_count = 2
 
@@ -97,6 +99,6 @@ resource "null_resource" "local_k8s_context" {
   depends_on = [google_container_cluster.main]
 
   provisioner "local-exec" {
-    command = "for i in 1 2 3 4 5; do gcloud container clusters get-credentials ${google_container_cluster.main.name} --project=${var.gcp_project_id} --zone=${google_container_cluster.main.location} && break || sleep 60; done"
+    command = "for i in 1 2 3 4 5; do gcloud container clusters get-credentials ${google_container_cluster.main.name} --project=${var.project_id} --zone=${google_container_cluster.main.location} && break || sleep 60; done"
   }
 }

@@ -4,11 +4,11 @@
 #  network_tier = "STANDARD"
 #}
 
-resource "google_compute_address" "loadbalancer_premium" {
-  name         = "my-premium-tier-ip-address"
-  region       = var.region
-  network_tier = "PREMIUM"
-}
+#resource "google_compute_address" "loadbalancer_premium" {
+#  name         = "my-premium-tier-ip-address"
+#  region       = var.region
+#  network_tier = "PREMIUM"
+#}
 
 
 
@@ -115,10 +115,10 @@ resource "null_resource" "install_ingress_controller" {
 # targetPool      a272abf6849f3498da993b70beed9df6                                                                                            == Loadbalancer.Backend
   # healtcheck k8s-f80329dcc1cd7006-node
 
-resource "null_resource" "uninstall_ingress_controller" {
-  provisioner "local-exec" {
-    when    = destroy
-#    command = "helm uninstall ingress-nginx --namespace ingress-nginx"
-    command = "kubectl delete -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.8.0/deploy/static/provider/cloud/deploy.yaml"
-  }
-}
+#resource "null_resource" "uninstall_ingress_controller" {
+#  provisioner "local-exec" {
+#    when    = destroy
+##    command = "helm uninstall ingress-nginx --namespace ingress-nginx"
+#    command = "kubectl delete -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.8.0/deploy/static/provider/cloud/deploy.yaml"
+#  }
+#}

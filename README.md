@@ -47,15 +47,19 @@ Don't forget to give the project a star!
 1. Clone the repo. Replace {myproject} with a name of your new project/app.
    ```sh
    git clone git@github.com:petrzivny/infrastructure-skeleton.git {myproject}
-   cd {myproject}
+   cd {myproject}/app-stack
    ```
 2. Initialize terraform in this directory
    ```sh
-   cd app-stack
    terraform init
    ```
-3. Check and alter variables and secrets
-4. Provision complete application stack
+3. Create a [new](https://console.cloud.google.com/projectcreate) GCP project (or use existing one). Make sure [container](https://console.cloud.google.com/marketplace/product/google/container.googleapis.com), [artifactregistry](https://console.cloud.google.com/apis/library/artifactregistry.googleapis.com), [servicenetworking](https://console.cloud.google.com/apis/library/servicenetworking.googleapis.com), [secretmanager](https://console.cloud.google.com/apis/library/secretmanager.googleapis.com) and [logging](https://console.cloud.google.com/marketplace/product/google/logging.googleapis.com) APIs are enabled. 
+4. Setup variable specific for your project.
+   ```sh
+   cp terraform.tfvars.dist terraform.tfvars
+   ```
+5. Check and alter variables and secrets in `terraform.tfvars` with your favorite IDE.
+6. Provision complete application stack
    ```sh
    terraform apply
    ```

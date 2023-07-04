@@ -17,3 +17,13 @@ output "app_database_name" {
   description = "Name of the created database."
   value       = google_sql_database.app.name
 }
+
+output "app_database_user" {
+  description = "Username to access app database."
+  value       = google_sql_user.app.name
+}
+
+output "app_database_password" {
+  description = "Password to access app database."
+  value       = google_sql_user.app.password
+}
