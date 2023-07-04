@@ -18,36 +18,16 @@ output "project_id" {
   value       = google_container_cluster.main.project
 }
 
-
-
-output "app_gcp_service_account_name" {
-  description = "Name of the GCP service account which grants access to GCP secrets. Used in metadata.annotations.iam.gke.io/gcp-service-account k8 specification of ServiceAccount."
-  value       = module.gcp_app_client.app_gcp_service_account_email
-}
-
-output "app_k8_service_account_name" {
-  description = "Name of the k8 ServiceAccount used to access GCP service account which grants access to GCP secrets. Used in metadata.name."
-  value       = module.gcp_app_client.app_k8_service_account_name
-}
-
-output "app_k8_namespace" {
-  description = "Namespace of the application. To be used in helm `install {helm_name} --namespace {app_k8_namespace}` command."
-  value       = module.gcp_app_client.app_k8_namespace
-}
-
-output "app_database_name" {
-  description = "Name of the created database."
-  value       = module.gcp_app_client.app_database_name
-}
-
-output "app_database_user" {
-  description = "Username to access app database."
-  value       = module.gcp_app_client.app_database_user
-  sensitive   = true
-}
-
-output "app_database_password" {
-  description = "Password to access app database."
-  value       = module.gcp_app_client.app_database_password
-  sensitive   = true
+output "applications" {
+  description = "Detailed information for each application."
+  value = {
+    for key, app in module.gcp_app_client : key =>
+    {
+      app_gcp_service_account_name : app.app_gcp_service_account_email
+      app_k8_namespace : app.app_k8_namespace
+      app_database_name : app.app_database_name
+      app_database_user : app.app_database_user
+      app_database_password : "this is a secret and you need to find it in input variables"
+    }
+  }
 }

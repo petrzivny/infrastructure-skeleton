@@ -25,36 +25,11 @@ variable "allowing_admin_access_from_ip" {
 
 #--------------------------------------------------- Application Specific Variables ---------------------------------------------------
 
-variable "app_name" {
-  description = "Name of application/workload."
-  type        = string
-}
-
-variable "app_environment" {
-  description = "Environment of application/workload."
-  type        = string
-}
-
-variable "app_k8_namespace" {
-  description = "Which kubernetes namespace this application/workload will be placed in."
-  type        = string
-  default     = "default"
-}
-
-variable "app_k8_service_account_name" {
-  description = "Name of the kubernetes service account used to access GCP service account which grants access to GCP secrets."
-  type        = string
-  default     = "mypodserviceaccount"
-}
-
-variable "db_user_name" {
-  description = "Database regular user name"
-  type        = string
-  sensitive   = true
-}
-
-variable "db_user_password" {
-  description = "Database regular user password"
-  type        = string
-  sensitive   = true
+variable "applications" {
+  type = map(object({
+    app_environment   = string
+    database_user     = string
+    database_password = string
+    secrets           = map(object({ value = string }))
+  }))
 }

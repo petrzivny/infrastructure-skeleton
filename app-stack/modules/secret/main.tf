@@ -15,7 +15,8 @@ resource "google_service_account_iam_binding" "main" {
 # Create a secrets that the workload identity service account can access
 #------------------------------------------------------------------------------
 resource "google_secret_manager_secret" "DATABASE_HOST" {
-  secret_id = "DATABASE_HOST"
+  secret_id = "${var.app_name}-${var.app_environment}-DATABASE_HOST"
+#  secret_id = "DATABASE_HOST"
   labels = {
     "app"         = var.app_name
     "environment" = var.app_environment
@@ -42,7 +43,8 @@ resource "google_secret_manager_secret_iam_binding" "DATABASE_HOST" {
 
 #------------------------------------------------------------------------------
 resource "google_secret_manager_secret" "DATABASE_NAME" {
-  secret_id = "DATABASE_NAME"
+  secret_id = "${var.app_name}-${var.app_environment}-DATABASE_NAME"
+#  secret_id = "DATABASE_NAME"
   labels = {
     "app"         = var.app_name
     "environment" = var.app_environment
@@ -69,7 +71,8 @@ resource "google_secret_manager_secret_iam_binding" "DATABASE_NAME" {
 
 #------------------------------------------------------------------------------
 resource "google_secret_manager_secret" "DATABASE_USER" {
-  secret_id = "DATABASE_USER"
+  secret_id = "${var.app_name}-${var.app_environment}-DATABASE_USER"
+#  secret_id = "DATABASE_USER"
   labels = {
     "app"         = var.app_name
     "environment" = var.app_environment
@@ -96,7 +99,8 @@ resource "google_secret_manager_secret_iam_binding" "DATABASE_USER" {
 
 #------------------------------------------------------------------------------
 resource "google_secret_manager_secret" "DATABASE_PASSWORD" {
-  secret_id = "DATABASE_PASSWORD"
+  secret_id = "${var.app_name}-${var.app_environment}-DATABASE_PASSWORD"
+#  secret_id = "DATABASE_PASSWORD"
   labels = {
     "app"         = var.app_name
     "environment" = var.app_environment
