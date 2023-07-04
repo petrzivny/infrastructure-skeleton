@@ -27,3 +27,9 @@ output "app_database_password" {
   description = "Password to access app database."
   value       = google_sql_user.app.password
 }
+
+output "secrets" {
+  value = {
+    for key, value in local.variable_mapping : key => "(fetch it directly from Secret Manager)"
+  }
+}

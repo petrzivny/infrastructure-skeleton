@@ -13,12 +13,7 @@ resource "google_service_account_iam_binding" "main" {
 
 module "secret" {
   source = "../secret"
-  for_each = {
-    DATABASE_HOST = var.cloud_sql_database_private_ip,
-    DATABASE_NAME = google_sql_database.app.name,
-    DATABASE_USER = google_sql_user.app.name,
-    DATABASE_PASSWORD = google_sql_user.app.password,
-  }
+  for_each = local.variable_mapping
 
   app_environment              = var.app_environment
   app_name                     = var.app_name
