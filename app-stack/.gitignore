@@ -33,6 +33,4 @@ override.tf.json
 .terraformrc
 terraform.rc
 
-
 auth*.json
-secrets.tf

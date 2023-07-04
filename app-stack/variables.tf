@@ -30,6 +30,6 @@ variable "applications" {
     app_environment   = string
     database_user     = string
     database_password = string
-    secrets           = map(object({ value = string }))
+    #    secrets           = map(object({ value = string }))
   }))
 }

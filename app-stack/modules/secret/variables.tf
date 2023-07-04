@@ -1,8 +1,3 @@
-variable "gcp_project_id" {
-  description = "Id of the root GCP project."
-  type        = string
-}
-
 variable "app_name" {
   description = "Name of application/workload."
   type        = string
@@ -13,32 +8,17 @@ variable "app_environment" {
   type        = string
 }
 
-variable "app_k8_namespace" {
-  description = "Which kubernetes namespace this application/workload will be placed in."
+variable "google_service_account_email" {
+  description = "Email for workload identity service account."
   type        = string
 }
 
-variable "app_k8_service_account_name" {
-  description = "Name of the kubernetes service account used to access GCP service account which grants access to GCP secrets."
+variable "secret_name" {
+  description = "Name of the secret in Secret Manager"
   type        = string
 }
 
-variable "db_host_private_ip" {
-  description = "Private IP address of database."
-  type        = string
-}
-
-variable "db_name" {
-  description = "Name of the database."
-  type        = string
-}
-
-variable "db_user" {
-  description = "User name of the database user."
-  type        = string
-}
-
-variable "db_password" {
-  description = "Password of the database user."
+variable "secret_value" {
+  description = "Value of the secret in first version."
   type        = string
 }

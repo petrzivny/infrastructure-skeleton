@@ -1,6 +1,6 @@
 output "app_gcp_service_account_email" {
   description = "Name of the GCP service account which grants access to GCP secrets."
-  value       = module.gcp_app_secret.app_gcp_service_account_email
+  value       = google_service_account.main.email
 }
 
 output "app_k8_service_account_name" {
