@@ -17,7 +17,7 @@ resource "google_compute_firewall" "nginx_loadbalancer" {
   name          = "enable-call-nginx-ingress-webhook"
   network       = google_compute_network.main.name
   source_ranges = [google_container_cluster.main.private_cluster_config[0].master_ipv4_cidr_block]
-  target_tags = [local.node_pool_tag]
+  target_tags   = [local.node_pool_tag]
 
   allow {
     protocol = "tcp"
@@ -106,14 +106,14 @@ resource "null_resource" "install_ingress_controller" {
   depends_on = [null_resource.local_k8s_context]
 
   provisioner "local-exec" {
-#    command = "helm upgrade --install ingress-nginx ingress-nginx --repo https://kubernetes.github.io/ingress-nginx --namespace ingress-nginx --create-namespace"
+    #    command = "helm upgrade --install ingress-nginx ingress-nginx --repo https://kubernetes.github.io/ingress-nginx --namespace ingress-nginx --create-namespace"
     command = "kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.8.0/deploy/static/provider/cloud/deploy.yaml"
   }
 }
 # loadbalancer    a272abf6849f3498da993b70beed9df6 Network (target pool-based) TCP
 # forwarding rule a272abf6849f3498da993b70beed9df6 {"kubernetes.io/service-name":"ingress-nginx/ingress-nginx-controller"} EXTERNAL Premium   == Loadbalancer.Frontend
 # targetPool      a272abf6849f3498da993b70beed9df6                                                                                            == Loadbalancer.Backend
-  # healtcheck k8s-f80329dcc1cd7006-node
+# healtcheck k8s-f80329dcc1cd7006-node
 
 #resource "null_resource" "uninstall_ingress_controller" {
 #  provisioner "local-exec" {

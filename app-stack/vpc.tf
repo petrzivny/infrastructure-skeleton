@@ -11,7 +11,7 @@ resource "google_compute_network" "main" {
 
 resource "google_compute_subnetwork" "main" {
   #  name        = "${var.company_name}-${var.application_code}-${var.dev_environment}-csn-${var.region_code}"
-#    name        = "${google_container_cluster.main.name}-subnet"
+  #    name        = "${google_container_cluster.main.name}-subnet"
   name                     = "${var.environment}-subnet-${var.region}"
   region                   = var.region
   network                  = google_compute_network.main.id

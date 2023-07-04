@@ -7,7 +7,7 @@ module "gcp_app_client" {
 
   # Which kubernetes namespace this application/workload will be placed in.
   app_k8_namespace = "default"
-#  app_k8_namespace = var.app_name
+  #  app_k8_namespace = var.app_name
 
   # Name of the kubernetes service account which will be used to access GCP service account which grants access to GCP secrets
   app_k8_service_account_name = "gcp-secret-manager-binding-service-account"

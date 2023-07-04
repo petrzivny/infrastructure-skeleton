@@ -31,9 +31,9 @@ resource "google_container_cluster" "main" {
       disabled = false
     }
 
-#    http_load_balancing {
-#      disabled = true
-#    }
+    #    http_load_balancing {
+    #      disabled = true
+    #    }
   }
 
   private_cluster_config {
@@ -68,12 +68,12 @@ resource "google_container_cluster" "main" {
       disk_size_gb = 10
       disk_type    = "pd-standard"
       spot         = true
-      tags = [local.node_pool_tag]
-      labels = {}
+      tags         = [local.node_pool_tag]
+      labels       = {}
 
       #      machine_type = "e2-micro" nginx-ing-nginx-ingress-controller: 0/2 nodes are available: 2 Insufficient memory. preemption: 0/2 nodes are available: 2 No preemption victims found for incoming pod.
       machine_type = "e2-small"
-#      machine_type = "e2-medium"
+      #      machine_type = "e2-medium"
       metadata = {
         "disable-legacy-endpoints" = "true"
       }

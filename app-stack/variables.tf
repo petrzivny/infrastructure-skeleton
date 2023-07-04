@@ -19,8 +19,8 @@ variable "environment" {
 variable "allowing_admin_access_from_ip" {
   description = "To access your cluster using kubectl (or Kubernetes API) and to access database."
   type        = string
-  nullable = true
-  default = null
+  nullable    = true
+  default     = null
 }
 
 #--------------------------------------------------- Application Specific Variables ---------------------------------------------------
@@ -50,11 +50,11 @@ variable "app_k8_service_account_name" {
 variable "db_user_name" {
   description = "Database regular user name"
   type        = string
-  sensitive = true
+  sensitive   = true
 }
 
 variable "db_user_password" {
   description = "Database regular user password"
   type        = string
-  sensitive = true
+  sensitive   = true
 }
