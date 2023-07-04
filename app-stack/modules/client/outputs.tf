@@ -13,21 +13,6 @@ output "app_k8_namespace" {
   value       = var.app_k8_namespace
 }
 
-output "app_database_name" {
-  description = "Name of the created database."
-  value       = google_sql_database.app.name
-}
-
-output "app_database_user" {
-  description = "Username to access app database."
-  value       = google_sql_user.app.name
-}
-
-output "app_database_password" {
-  description = "Password to access app database."
-  value       = google_sql_user.app.password
-}
-
 output "secrets" {
   value = {
     for key, value in local.variable_mapping : key => "(fetch it directly from Secret Manager)"

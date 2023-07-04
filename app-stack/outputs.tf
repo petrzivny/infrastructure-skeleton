@@ -25,9 +25,6 @@ output "applications" {
     {
       app_gcp_service_account_name : app.app_gcp_service_account_email
       app_k8_namespace : app.app_k8_namespace
-      app_database_name : app.app_database_name
-      app_database_user : app.app_database_user
-      app_database_password : "this is a secret and you need to find it in input variables"
       secrets : app.secrets
     }
   }
