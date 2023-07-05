@@ -1,9 +1,7 @@
 resource "google_compute_global_address" "ip_range" {
-  #  address       = "10.194.80.0"
   address      = "10.120.80.0"
   address_type = "INTERNAL"
-  #  name          = "${var.company_name}-${var.application_code}-${var.environment}-ipr-${var.region_code}"
-  name = "ipr-1"
+  name         = "${var.environment}-ip-range-for-google-services"
   #  change from premium to standard tier
   network       = google_compute_network.main.id
   prefix_length = 24

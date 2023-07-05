@@ -2,8 +2,8 @@
 resource "google_container_cluster" "main" {
   provider = google-beta
   #  name     = "${var.company_name}-${var.application_code}-${var.environment}-kcl-${var.region_code}"
-  name     = "cluster-1"
-  location = var.zone
+  name     = "${var.environment}-gke"
+  location = local.zone
 
   # Disable the Google Cloud Logging service because you may overrun the Logging free tier allocation, and it may be expensive
   #  logging_service = "none"
@@ -31,9 +31,9 @@ resource "google_container_cluster" "main" {
       disabled = false
     }
 
-#    http_load_balancing {
-#      disabled = true
-#    }
+    #    http_load_balancing {
+    #      disabled = true
+    #    }
   }
 
   private_cluster_config {
@@ -45,20 +45,22 @@ resource "google_container_cluster" "main" {
   ip_allocation_policy {}
 
   workload_identity_config {
-    workload_pool = "${var.gcp_project_id}.svc.id.goog"
+    workload_pool = "${var.project_id}.svc.id.goog"
   }
 
-  #  master_authorized_networks_config {
-  #    cidr_blocks {
-  #      cidr_block = var.allowing_admin_access_from_ip
-  #      display_name = "Holesovice"
-  #    }
-  #  }
+  master_authorized_networks_config {
+    dynamic "cidr_blocks" {
+      for_each = var.allowing_admin_access_from_ip == null ? [] : [1]
+      content {
+        cidr_block = var.allowing_admin_access_from_ip
+      }
+    }
+  }
 
   node_pool {
     name = "default-pool"
     node_locations = [
-      var.zone,
+      local.zone,
     ]
     node_count = 2
 
@@ -66,12 +68,12 @@ resource "google_container_cluster" "main" {
       disk_size_gb = 10
       disk_type    = "pd-standard"
       spot         = true
-      tags = [local.node_pool_tag]
-      labels = {}
+      tags         = [local.node_pool_tag]
+      labels       = {}
 
       #      machine_type = "e2-micro" nginx-ing-nginx-ingress-controller: 0/2 nodes are available: 2 Insufficient memory. preemption: 0/2 nodes are available: 2 No preemption victims found for incoming pod.
       machine_type = "e2-small"
-#      machine_type = "e2-medium"
+      #      machine_type = "e2-medium"
       metadata = {
         "disable-legacy-endpoints" = "true"
       }
@@ -97,6 +99,6 @@ resource "null_resource" "local_k8s_context" {
   depends_on = [google_container_cluster.main]
 
   provisioner "local-exec" {
-    command = "for i in 1 2 3 4 5; do gcloud container clusters get-credentials ${google_container_cluster.main.name} --project=${var.gcp_project_id} --zone=${google_container_cluster.main.location} && break || sleep 60; done"
+    command = "for i in 1 2 3 4 5; do gcloud container clusters get-credentials ${google_container_cluster.main.name} --project=${var.project_id} --zone=${google_container_cluster.main.location} && break || sleep 60; done"
   }
 }

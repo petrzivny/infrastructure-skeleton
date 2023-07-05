@@ -1,0 +1,7 @@
+project_id = "myproject-123456"
+
+# Fill in your IP for non-prod environment.
+allowing_admin_access_from_ip = "your.ip.in.cidr.format" # eg.: 82.105.142.182/32
+
+
+environment = "prod"
