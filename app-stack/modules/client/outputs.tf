@@ -14,7 +14,8 @@ output "app_k8_namespace" {
 }
 
 output "secrets" {
+  description = "Secrets to be fetched from Secret Manager by application after deployment."
   value = {
-    for key, value in local.variable_mapping : key => "(fetch it directly from Secret Manager)"
+    for key, value in local.variable_mapping : key => "******"
   }
 }
