@@ -18,9 +18,10 @@ output "applications" {
   value = {
     for key, app in module.gcp_app_client : key =>
     {
+      app_name : app.app_name
       app_k8_namespace : app.app_k8_namespace
       app_environment : app.app_environment
-      gcp_project_id: google_container_cluster.main.project
+      gcp_project_id : google_container_cluster.main.project
       app_gcp_service_account_name : app.app_gcp_service_account_email
       app_k8_service_account_name : app.app_k8_service_account_name
       secrets : app.secrets

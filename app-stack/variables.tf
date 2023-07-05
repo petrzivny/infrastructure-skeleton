@@ -26,10 +26,10 @@ variable "allowing_admin_access_from_ip" {
 #--------------------------------------------------- Application Specific Variables ---------------------------------------------------
 
 variable "applications" {
-  type = map(object({
+  type = list(object({
+    app_name          = string
     app_environment   = string
     database_user     = string
     database_password = string
-    #    secrets           = map(object({ value = string }))
   }))
 }

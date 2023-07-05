@@ -13,6 +13,11 @@ output "app_k8_namespace" {
   value       = var.app_k8_namespace
 }
 
+output "app_name" {
+  description = "Namespace where kubernetes ServiceAccount should be placed (and the whole application)."
+  value       = var.app_name
+}
+
 output "app_environment" {
   description = "Environment name of the application runtime."
   value       = var.app_environment
