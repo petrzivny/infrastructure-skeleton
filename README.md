@@ -87,6 +87,8 @@ Don't forget to give the project a star! Thanks again!
 
 <!-- ROADMAP -->
 ## Roadmap
+- [ ] Add static public IP
+- [ ] Copy all outside images to own repo and remove google_compute_router
 - [ ] CI: Add GCP cost estimation
 
 See the [open issues](https://github.com/petrzivny/infrastructure-skeleton/issues) for a full list of proposed features (and known issues).
