@@ -7,7 +7,7 @@ resource "google_service_account_iam_binding" "main" {
   service_account_id = google_service_account.main.id
   role               = "roles/iam.workloadIdentityUser"
   members = [
-    "serviceAccount:${var.gcp_project_id}.svc.id.goog[${var.app_k8_namespace}/${var.app_k8_service_account_name}]",
+    "serviceAccount:${var.project_id}.svc.id.goog[${var.app_k8_namespace}/${var.app_k8_service_account_name}]",
   ]
 }
 

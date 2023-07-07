@@ -1,4 +1,4 @@
-variable "gcp_project_id" {
+variable "project_id" {
   description = "Id of the root GCP project."
   type        = string
 }

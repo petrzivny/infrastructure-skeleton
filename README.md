@@ -53,7 +53,7 @@ Don't forget to give the project a star!
    ```sh
    terraform init
    ```
-3. Create a [new](https://console.cloud.google.com/projectcreate) GCP project (or use existing one). Make sure [container](https://console.cloud.google.com/marketplace/product/google/container.googleapis.com), [artifactregistry](https://console.cloud.google.com/apis/library/artifactregistry.googleapis.com), [servicenetworking](https://console.cloud.google.com/apis/library/servicenetworking.googleapis.com), [secretmanager](https://console.cloud.google.com/apis/library/secretmanager.googleapis.com) and [logging](https://console.cloud.google.com/marketplace/product/google/logging.googleapis.com) APIs are enabled. 
+3. Create a [new](https://console.cloud.google.com/projectcreate) GCP project (or use existing one). 
 4. Setup variable specific for your project.
    ```sh
    cp terraform.tfvars.dist terraform.tfvars

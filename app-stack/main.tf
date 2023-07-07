@@ -1,11 +1,11 @@
 module "gcp_app_client" {
   source = "./modules/client"
   for_each = {
-    for index, vm in var.applications :
-    "${vm.app_name}-${vm.app_environment}" => vm
+    for index, app in var.applications :
+    "${app.app_name}-${app.app_environment}" => app
   }
 
-  gcp_project_id = var.project_id
+  project_id = var.project_id
 
   app_name        = each.value.app_name
   app_environment = each.value.app_environment
@@ -22,3 +22,19 @@ module "gcp_app_client" {
   database_password             = each.value.database_password
 }
 
+module "project-services" {
+  source  = "terraform-google-modules/project-factory/google//modules/project_services"
+  version = "~> 12.0"
+
+  project_id = var.project_id
+
+  activate_apis = [
+    "secretmanager.googleapis.com",
+    "artifactregistry.googleapis.com",
+    "servicenetworking.googleapis.com",
+    "logging.googleapis.com",
+    "container.googleapis.com",
+  ]
+
+  disable_services_on_destroy = true
+}
