@@ -88,7 +88,11 @@ Don't forget to give the project a star! Thanks again!
 <!-- ROADMAP -->
 ## Roadmap
 - [ ] Add static public IP
-- [ ] Copy all outside images to own repo and remove google_compute_router
+- [ ] Add certbot automatic creation
+- [ ] Copy all outside images for ingress-nginx to own repo
+- [ ] Copy all outside images for certbot to own repo and 
+- [ ] Remove google_compute_router
+- [ ] Add Grafana
 - [ ] CI: Add GCP cost estimation
 
 See the [open issues](https://github.com/petrzivny/infrastructure-skeleton/issues) for a full list of proposed features (and known issues).
