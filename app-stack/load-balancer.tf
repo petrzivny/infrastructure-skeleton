@@ -11,7 +11,7 @@
 #}
 
 
-
+# ingress-nginx: to allow master nodes access to port 8443/tcp on worker nodes. See https://kubernetes.github.io/ingress-nginx/deploy/#gce-gke
 resource "google_compute_firewall" "nginx_loadbalancer" {
   #  destination_ranges      = []
   name          = "enable-call-nginx-ingress-webhook"

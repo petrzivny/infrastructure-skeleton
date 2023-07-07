@@ -1,8 +1,8 @@
 resource "google_sql_database_instance" "postgres" {
-  name                = "${var.environment}-postgres-${var.region}"
-  database_version    = "POSTGRES_15"
-  region              = google_compute_subnetwork.main.region
-  deletion_protection = false # remove after debug
+  name             = "${var.environment}-postgres-${var.region}"
+  database_version = "POSTGRES_15"
+  region           = google_compute_subnetwork.main.region
+  #  deletion_protection = false # remove after debug
 
   settings {
     disk_size = 10
